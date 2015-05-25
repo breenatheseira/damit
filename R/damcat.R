@@ -31,24 +31,27 @@ damcategory <- function(daySelect = "1", monthSelect = "January", riverSelect = 
 monthArr <- c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
 daysArr <- c(31,28,31,30,31,30,31,31,30,31,30,31)
 
-tomorrow <- function(day = "1", month = "January"){
+new_date <- function(day = "1", month = "January", duration){
 
   day = "31"
   month = "March"
+  duration
+  total_days <- as.numeric(day) + duration
+
   for (i in 1:length(monthArr)){
     if (month == monthArr[i]){
-      if (as.numeric(day) < daysArr[i]){
-        t_day <- as.numeric(day) + 1
-        t_month <- month
+      if (total_days < daysArr[i]){
+        new_day <- total_days
+        new_month <- month
       } else {
-        t_day <- 1
+        new_day <- total_days - daysArr[i]
         # for Dec to return to January
         if (month == "December")
-          t_month <- monthArr[1]
+          new_month <- monthArr[1]
         else
-          t_month <- monthArr[i+1]
+          ner_month <- monthArr[i+1]
       }
     }
   }
-  return(paste(t_day, t_month, sep = " "))
+  return(paste(new_day, new_month, sep = " "))
 }
