@@ -35,8 +35,7 @@ new_date <- function(day = "1", month = "January", duration){
 
   day = "31"
   month = "March"
-  duration
-  total_days <- as.numeric(day) + duration
+  total_days <- as.numeric(day) + as.numeric(duration)
 
   for (i in 1:length(monthArr)){
     if (month == monthArr[i]){
