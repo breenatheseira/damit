@@ -27,3 +27,28 @@ damcategory <- function(daySelect = "1", monthSelect = "January", riverSelect = 
 
   return(result = predict(fit,newdata=newdata,type=c("class")))
 }
+
+monthArr <- c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
+daysArr <- c(31,28,31,30,31,30,31,31,30,31,30,31)
+
+tomorrow <- function(day = "1", month = "January"){
+
+  day = "31"
+  month = "March"
+  for (i in 1:length(monthArr)){
+    if (month == monthArr[i]){
+      if (as.numeric(day) < daysArr[i]){
+        t_day <- as.numeric(day) + 1
+        t_month <- month
+      } else {
+        t_day <- 1
+        # for Dec to return to January
+        if (month == "December")
+          t_month <- monthArr[1]
+        else
+          t_month <- monthArr[i+1]
+      }
+    }
+  }
+  return(paste(t_day, t_month, sep = " "))
+}
